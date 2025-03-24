@@ -1,0 +1,27 @@
+version: '3.8'
+
+services:
+  challenge_a:
+    build:
+      context: .  # Build context is the root folder of the project
+      dockerfile: ChallengeA/Dockerfile  # Dockerfile inside the ChallengeA folder
+    volumes:
+      - ./output:/app/output  # Expose output folder to the host machine
+      - generated_data:/app/generatedData  # Shared volume for the generated file
+    container_name: challenge_a
+    command: ["dotnet", "ChallengeA.dll"]  # Command to run ChallengeA
+
+  challenge_b:
+    build:
+      context: .  # Build context is the root folder of the project
+      dockerfile: ChallengeB/Dockerfile  # Dockerfile inside the ChallengeB folder
+    depends_on:
+      - challenge_a  # Ensure Challenge A runs before Challenge B
+    volumes:
+      - ./output:/app/output  # Expose output folder to the host machine
+      - generated_data:/app/generatedData  # Shared volume for reading generated file
+    container_name: challenge_b
+    command: ["dotnet", "ChallengeB.dll"]  # Command to run ChallengeB
+
+volumes:
+  generated_data:  # Define the shared volume for communication between services
