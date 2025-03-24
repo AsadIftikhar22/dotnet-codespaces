@@ -15,15 +15,18 @@ class Program
         // Use the shared volume path Docker will manage it automatically 
         // from the Docker Container and than our service B can run from it
         string filePath = "/app/generatedData/generatedData.txt"; 
-
+        string inputFilePath = "/app/output/generatedData.txt";
         using (StreamWriter writer = new StreamWriter(filePath))
         {
             while (currentSize < targetLines)
             {
                 // Generate and write containing types of objects
                 string line = GenerateRandomObjects();
-                writer.WriteLine(line);
-                currentSize += Encoding.UTF8.GetByteCount(line + "\n");
+                using(StreamWriter localwriter=new StreamWriter(inputFilePath)){
+                      writer.WriteLine(line);
+                      localwriter.WriteLine(line);
+                      currentSize += Encoding.UTF8.GetByteCount(line + "\n");
+                }
             }
         }
 
