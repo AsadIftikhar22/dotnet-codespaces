@@ -9,3 +9,6 @@ After running the containers, you should see the following output:
 
 ![image](https://github.com/user-attachments/assets/8b455f8e-819a-4b7a-81cb-78dcd75fd52b)
 
+Additionally, the generated input and processed data files will be available in your local directory, as shown in the command-line interface above.
+
+![image](https://github.com/user-attachments/assets/476170ff-deb8-43a3-84ef-a9847effbb58)
