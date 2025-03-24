@@ -7,4 +7,4 @@ To run the project, use the following command:
 
 After running the containers, you should see the following output:
 
-![image](https://github.com/user-attachments/assets/91561162-6031-4040-8879-3815c5f2f612)
+![image](https://github.com/user-attachments/assets/d2383e6c-26d1-4db4-9584-7f9888b073ac)
