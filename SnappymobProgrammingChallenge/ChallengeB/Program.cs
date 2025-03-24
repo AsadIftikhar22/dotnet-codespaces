@@ -7,6 +7,7 @@ class Program
     static void Main()
     {
         string filePath = "/app/generatedData/generatedData.txt";  // Path to the generated data file in shared volume
+        string outputFilePath = "/app/output/processedData.txt";        // Path to store the processed output
 
         if (!File.Exists(filePath))
         {
@@ -21,22 +22,23 @@ class Program
 
             // Iterate through each line in the file
             Console.WriteLine("Objects and their types from the generated data:");
-
-            foreach (var line in lines)
-            {
+        using (StreamWriter writer = new StreamWriter(outputFilePath)){
+            foreach (var line in lines){
                 // Split the line into individual objects
                 var objects = line.Split(',');
 
-                foreach (var obj in objects)
-                {
+                foreach (var obj in objects){
                     // Trim spaces before and after the alphanumeric object
                     string trimmedObj = obj.Trim();
-
+                    var objectType=GetObjectType(trimmedObj);
+                    // Write the processed data to the output file
+                    string outputLine = $"Object: {trimmedObj}, Type: {objectType}";
+                    writer.WriteLine(outputLine);
                     // Print the object and its type
-                    Console.WriteLine($"Object: {trimmedObj}, Type: {GetObjectType(trimmedObj)}");
+                    Console.WriteLine($"Object: {trimmedObj}, Type: {GetObjectType(objectType)}");
+                    }
                 }
             }
-
         }
         catch (Exception ex)
         {
